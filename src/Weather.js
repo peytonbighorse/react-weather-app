@@ -46,20 +46,23 @@ export default function Weather(props) {
   } else {
     return (
       <div className="weather-container">
+        <h1>Weather Search Engine</h1>
         <form onSubmit={searchCity}>
           <input
             type="search"
             placeholder="Enter a city"
             onChange={changeCity}
+            className="search-input"
           ></input>
-          <input type="submit" value="Search"></input>
+          <input type="submit" value="Search" className="search-btn"></input>
         </form>
         <div className="weather-content">
           <div>
             <h2>{cityHeading}</h2>
             <p className="weather-paragraph">Monday 22:50, {condition}</p>
             <p className="weather-paragraph">
-              Humidity: {humidity}%, Wind: {windSpeed}mph
+              Humidity: <strong>{humidity}%</strong>, Wind:{" "}
+              <strong>{windSpeed}mph</strong>
             </p>
           </div>
           <div>
