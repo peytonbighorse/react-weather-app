@@ -12,6 +12,7 @@ export default function Weather(props) {
   const [windSpeed, setWindSpeed] = useState(null);
   const [condition, setCondition] = useState("");
   const [weatherEmoji, setWeatherEmoji] = useState("");
+  const [date, setDate] = useState(null);
   const apiKey = `aef1757e37906f8atc32b9da5odbc24a`;
   const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
   //City
@@ -23,7 +24,11 @@ export default function Weather(props) {
   function searchCity(event) {
     event.preventDefault();
     axios.get(apiUrl).then((response) => {
-      console.log(response.data);
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const day = days[new Date(response.data.time).getDay()];
+      const hour = new Date(response.data.time).getHours();
+      const minutes = new Date(response.data.time).getMinutes();
+      setDate(`${day} ${hour}:${minutes}`);
       setCityHeading(response.data.city);
       setTemperature(response.data.temperature.current);
       setHumidity(response.data.temperature.humidity);
@@ -34,7 +39,11 @@ export default function Weather(props) {
   }
   if (!loaded) {
     axios.get(apiUrl).then((response) => {
-      console.log(response.data);
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const day = days[new Date(response.data.time).getDay()];
+      const hour = new Date(response.data.time).getHours();
+      const minutes = new Date(response.data.time).getMinutes();
+      setDate(`${day} ${hour}:${minutes}`);
       setCityHeading(response.data.city);
       setTemperature(response.data.temperature.current);
       setHumidity(response.data.temperature.humidity);
@@ -59,7 +68,9 @@ export default function Weather(props) {
         <div className="weather-content">
           <div>
             <h2>{cityHeading}</h2>
-            <p className="weather-paragraph">Monday 22:50, {condition}</p>
+            <p className="weather-paragraph">
+              {date}, {condition}
+            </p>
             <p className="weather-paragraph">
               Humidity: <strong>{humidity}%</strong>, Wind:{" "}
               <strong>{windSpeed}mph</strong>
