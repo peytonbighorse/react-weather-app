@@ -1,0 +1,21 @@
+.temperature-container {
+  display: flex;
+}
+.weather-emoji {
+  margin-top: 10px;
+  width: 70px;
+  height: 70px;
+}
+
+.temperature {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.temperature-unit {
+  font-size: 15px;
+  margin-top: 1rem;
+}
+.active-unit {
+  font-weight: bold;
+}

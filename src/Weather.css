@@ -62,19 +62,8 @@ footer a:hover {
   display: flex;
   justify-content: space-between;
 }
-.right-side {
-  display: flex;
-  justify-content: center;
-}
+
 .weather-paragraph {
   margin-top: 0;
   margin-bottom: 5px;
-}
-.weather-emoji {
-  width: 70px;
-  height: auto;
-}
-.temperature {
-  font-size: 60px;
-  font-weight: bold;
 }

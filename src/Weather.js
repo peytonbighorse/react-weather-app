@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
 import FormattedDate from "./FormattedDate";
+import Temperature from "./Temperature";
 
 export default function Weather(props) {
   //Variables
@@ -71,16 +72,8 @@ export default function Weather(props) {
               <strong>{windSpeed}mph</strong>
             </p>
           </div>
-          <div>
-            <p className="right-side">
-              <img
-                src={`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${weatherEmoji}.png`}
-                className="weather-emoji"
-                alt={`${weatherEmoji} icon`}
-              />
-              <span className="temperature">{Math.round(temperature)}°F </span>
-            </p>
-          </div>
+
+          <Temperature emoji={weatherEmoji} temperature={temperature} />
         </div>
 
         <footer>
