@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
 
 export default function Weather(props) {
   //Variables
+  const [date, setDate] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [city, setCity] = useState(props.city);
   const [cityHeading, setCityHeading] = useState(city);
@@ -12,7 +14,7 @@ export default function Weather(props) {
   const [windSpeed, setWindSpeed] = useState(null);
   const [condition, setCondition] = useState("");
   const [weatherEmoji, setWeatherEmoji] = useState("");
-  const [date, setDate] = useState(null);
+
   const apiKey = `aef1757e37906f8atc32b9da5odbc24a`;
   const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
   //City
@@ -24,32 +26,25 @@ export default function Weather(props) {
   function searchCity(event) {
     event.preventDefault();
     axios.get(apiUrl).then((response) => {
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const day = days[new Date(response.data.time).getDay()];
-      const hour = new Date(response.data.time).getHours();
-      const minutes = new Date(response.data.time).getMinutes();
-      setDate(`${day} ${hour}:${minutes}`);
+      console.log(response.data);
       setCityHeading(response.data.city);
       setTemperature(response.data.temperature.current);
       setHumidity(response.data.temperature.humidity);
       setWindSpeed(response.data.wind.speed);
       setCondition(response.data.condition.description);
       setWeatherEmoji(response.data.condition.icon);
+      setDate(response.data.time);
     });
   }
   if (!loaded) {
     axios.get(apiUrl).then((response) => {
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const day = days[new Date(response.data.time).getDay()];
-      const hour = new Date(response.data.time).getHours();
-      const minutes = new Date(response.data.time).getMinutes();
-      setDate(`${day} ${hour}:${minutes}`);
       setCityHeading(response.data.city);
       setTemperature(response.data.temperature.current);
       setHumidity(response.data.temperature.humidity);
       setWindSpeed(response.data.wind.speed);
       setCondition(response.data.condition.description);
       setWeatherEmoji(response.data.condition.icon);
+      setDate(response.data.time);
       setLoaded(true);
     });
   } else {
@@ -69,7 +64,7 @@ export default function Weather(props) {
           <div>
             <h2>{cityHeading}</h2>
             <p className="weather-paragraph">
-              {date}, {condition}
+              <FormattedDate city={city} date={date} />, {condition}
             </p>
             <p className="weather-paragraph">
               Humidity: <strong>{humidity}%</strong>, Wind:{" "}
@@ -87,6 +82,7 @@ export default function Weather(props) {
             </p>
           </div>
         </div>
+
         <footer>
           This project was coded by{" "}
           <a href="https://github.com/peytonbighorse">Peyton Bighorse</a> and is{" "}
