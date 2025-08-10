@@ -78,12 +78,29 @@ export default function Weather(props) {
 
         <footer>
           This project was coded by{" "}
-          <a href="https://github.com/peytonbighorse">Peyton Bighorse</a> and is{" "}
-          <a href="https://github.com/peytonbighorse/react-weather-app">
+          <a
+            href="https://github.com/peytonbighorse"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Peyton Bighorse
+          </a>{" "}
+          and is{" "}
+          <a
+            href="https://github.com/peytonbighorse/react-weather-app"
+            target="_blank"
+            rel="noreferrer"
+          >
             open-sourced on GitHub
           </a>{" "}
           and hosted on{" "}
-          <a href="https://pmb-react-weather-search.netlify.app/">Netlify</a>
+          <a
+            href="https://pmb-react-weather-search.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Netlify
+          </a>
         </footer>
       </div>
     );
