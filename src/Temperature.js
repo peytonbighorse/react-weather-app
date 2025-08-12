@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Temperature.css";
 export default function Temperature(props) {
   return (
