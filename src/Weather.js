@@ -16,6 +16,7 @@ export default function Weather(props) {
   const [windSpeed, setWindSpeed] = useState(null);
   const [condition, setCondition] = useState("");
   const [weatherEmoji, setWeatherEmoji] = useState("");
+  const [cityTracker, setCityTracker] = useState(false);
 
   const apiKey = `aef1757e37906f8atc32b9da5odbc24a`;
   const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
@@ -27,6 +28,11 @@ export default function Weather(props) {
 
   function searchCity(event) {
     event.preventDefault();
+    if (cityTracker) {
+      setCityTracker(false);
+    } else if (!cityTracker) {
+      setCityTracker(true);
+    }
     axios.get(apiUrl).then((response) => {
       console.log(response.data);
       setCityHeading(response.data.city);
@@ -77,7 +83,11 @@ export default function Weather(props) {
           <Temperature emoji={weatherEmoji} temperature={temperature} />
         </div>
         <div className="forecast">
-          <WeatherForecast emoji={weatherEmoji} city={city} />
+          <WeatherForecast
+            emoji={weatherEmoji}
+            city={city}
+            cityTracker={cityTracker}
+          />
         </div>
 
         <footer>
