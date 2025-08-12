@@ -1,0 +1,19 @@
+.forecast-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+.forecast-icon {
+  display: block;
+  margin: 0 auto;
+  width: 40px;
+}
+.min-temp {
+  opacity: 0.5;
+}
+.max-temp {
+  font-weight: 400;
+}

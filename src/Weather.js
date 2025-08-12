@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Weather.css";
 import FormattedDate from "./FormattedDate";
 import Temperature from "./Temperature";
+import WeatherForecast from "./WeatherForecast";
 
 export default function Weather(props) {
   //Variables
@@ -74,6 +75,9 @@ export default function Weather(props) {
           </div>
 
           <Temperature emoji={weatherEmoji} temperature={temperature} />
+        </div>
+        <div className="forecast">
+          <WeatherForecast emoji={weatherEmoji} city={city} />
         </div>
 
         <footer>
