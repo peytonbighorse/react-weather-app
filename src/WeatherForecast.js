@@ -3,7 +3,7 @@ import "./WeatherForecast.css";
 import axios from "axios";
 
 export default function WeatherForecast(props) {
-  const [city, setCity] = useState(props.city);
+  const city = props.city;
   const [forecast, setForecast] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -13,37 +13,40 @@ export default function WeatherForecast(props) {
   }
 
   if (loaded) {
-    function getDay() {
+    function getWeekday(day) {
       const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const date = new Date(forecast[0].time * 1000);
-      const day = days[date.getDay()];
-      return day;
+      const date = new Date(day.time * 1000);
+      return days[date.getDay()];
     }
-    function getMinTemp() {
-      return Math.round(forecast[0].temperature.minimum);
+    function getMinTemp(day) {
+      return Math.round(day.temperature.minimum);
     }
-    function getMaxTemp() {
-      return Math.round(forecast[0].temperature.maximum);
+    function getMaxTemp(day) {
+      return Math.round(day.temperature.maximum);
     }
-    function getWeatherIcon() {
-      return forecast[0].condition.icon_url;
+    function getWeatherIcon(day) {
+      return day.condition.icon_url;
     }
     return (
       <div className="forecast-container">
-        <div className="weather-forecast">
-          <div className="day">{getDay()}</div>
-          <div>
-            <img
-              src={getWeatherIcon()}
-              alt={`${props.emoji} icon`}
-              className="forecast-icon"
-            />
-          </div>
-          <div className="forecast-temperature">
-            <span className="max-temp">{getMaxTemp()}°</span>{" "}
-            <span className="min-temp">{getMinTemp()}°</span>
-          </div>
-        </div>
+        {forecast.map((dailyForecast, index) => {
+          return (
+            <div className="weather-forecast" key={index}>
+              <div className="day">{getWeekday(dailyForecast)}</div>
+              <div>
+                <img
+                  src={getWeatherIcon(dailyForecast)}
+                  alt={`weather icon`}
+                  className="forecast-icon"
+                />
+              </div>
+              <div className="forecast-temperature">
+                <span className="max-temp">{getMaxTemp(dailyForecast)}°</span>{" "}
+                <span className="min-temp">{getMinTemp(dailyForecast)}°</span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   } else {
