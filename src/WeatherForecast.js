@@ -19,24 +19,29 @@ export default function WeatherForecast(props) {
       const day = days[date.getDay()];
       return day;
     }
+    function getMinTemp() {
+      return Math.round(forecast[0].temperature.minimum);
+    }
+    function getMaxTemp() {
+      return Math.round(forecast[0].temperature.maximum);
+    }
+    function getWeatherIcon() {
+      return forecast[0].condition.icon_url;
+    }
     return (
       <div className="forecast-container">
         <div className="weather-forecast">
           <div className="day">{getDay()}</div>
           <div>
             <img
-              src={forecast[0].condition.icon_url}
+              src={getWeatherIcon()}
               alt={`${props.emoji} icon`}
               className="forecast-icon"
             />
           </div>
           <div className="forecast-temperature">
-            <span className="max-temp">
-              {Math.round(forecast[0].temperature.maximum)}°
-            </span>{" "}
-            <span className="min-temp">
-              {Math.round(forecast[0].temperature.minimum)}°
-            </span>
+            <span className="max-temp">{getMaxTemp()}°</span>{" "}
+            <span className="min-temp">{getMinTemp()}°</span>
           </div>
         </div>
       </div>
