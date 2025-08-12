@@ -1,6 +1,8 @@
 .forecast-container {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
+  display: flex;
+  justify-content: space-between;
 }
 .weather-forecast {
   margin-top: 20px;
